@@ -11,7 +11,7 @@ function MyOrder() {
     return (
         <Layout>
             Cosas que voy hacer
-            <div className="px-6 overflow-y-scroll flex-1">
+            <div className="flex flex-col w-80">
                 {
                     order?.slice(-1)[0].products.map(product => (
                         <OrderCard
@@ -23,6 +23,17 @@ function MyOrder() {
                         />
                     ))
                 }
+            </div>
+            <div className="">
+                {order?.slice(-1)[0].date.toDateString()}
+                <div className="flex justify-between">
+                    <p>
+                        Total:
+                    </p>
+                    <p className="text-lg font-medium">
+                        ${order?.slice(-1)[0].total_price}
+                    </p>
+                </div>
             </div>
         </Layout>
     )

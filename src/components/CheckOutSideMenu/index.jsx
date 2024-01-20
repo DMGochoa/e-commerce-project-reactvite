@@ -35,6 +35,7 @@ function CheckOutSideMenu() {
         setOrder([...order, orderToAdd])
         setCartProducts([])
         setShoppingCount(0)
+        CheckoutSideMenu.setClose()
     }
 
     return (
