@@ -29,8 +29,8 @@ function CheckOutSideMenu() {
         const orderToAdd = {
             date: new Date(),
             products: cartProducts,
-            total_products: cartProducts.length,
-            total_price: totalPrice(cartProducts),
+            totalProducts: cartProducts.length,
+            totalPrice: totalPrice(cartProducts),
         }
         setOrder([...order, orderToAdd])
         setCartProducts([])
