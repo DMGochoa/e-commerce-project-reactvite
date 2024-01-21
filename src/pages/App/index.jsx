@@ -1,6 +1,6 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
 
-import { ShoppingCartContext, ShoppingCartProvider } from '../../context'
+import { ShoppingCartProvider } from '../../context'
 import { Home } from '../Home'
 import { SignIn } from '../SignIn'
 import { MyOrder } from '../MyOrder'
@@ -15,6 +15,7 @@ import './App.css'
 function AppRouters() {
   return useRoutes([
     {path: '/', element: <Home />},
+    {path: '/category/:category', element: <Home />},
     {path: '/my-account', element: <MyAccount />},
     {path: '/my-order', element: <MyOrder />},
     {path: '/my-orders', element: <MyOrders />},
