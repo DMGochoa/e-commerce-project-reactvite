@@ -1,8 +1,17 @@
 import { createContext, useState, useEffect } from 'react'
+import { AppLocalStorage } from '../utils'
 
 export const ShoppingCartContext = createContext()
 
 export const ShoppingCartProvider = ({children}) => {
+  // My Account · Info
+  const [account, setAccount] = useState({})
+  const localAccount = new AppLocalStorage('account', {})
+
+  // Sign out
+  const [signOut, setSignOut] = useState(false)
+  const localSignOut = new AppLocalStorage('sign-out', false)
+
   // Shopping Cart · Increment quantity
   const [count, setCount] = useState(0)
 
@@ -96,7 +105,11 @@ export const ShoppingCartProvider = ({children}) => {
       setSearchByTitle,
       filteredItems,
       searchByCategory,
-      setSearchByCategory
+      setSearchByCategory,
+      account,
+      setAccount,
+      signOut,
+      setSignOut
     }}>
       {children}
     </ShoppingCartContext.Provider>

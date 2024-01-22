@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context'
+import { AppLocalStorage } from '../../utils'
 
 const Navbar = () => {
   const context = useContext(ShoppingCartContext)
@@ -100,11 +101,17 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to='/sing-in'
+            to='/sing-out'
             className={({ isActive }) =>
               isActive ? activeStyle : undefined
-            }>
-            Sign In
+            }
+            onClick={
+              () => {
+                new AppLocalStorage('sign-out', true)
+              }
+            }
+          >
+            Sign Out
           </NavLink>
         </li>
         <li className='flex items-center'>
