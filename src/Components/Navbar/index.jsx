@@ -13,7 +13,7 @@ const Navbar = () => {
       return (
         <>
         <li className='text-black/60'>
-          teff@platzi.com
+          {context.account?.email || new AppLocalStorage('account', {}).get().email}
         </li>
         <li>
           <NavLink
