@@ -38,11 +38,12 @@ function Home() {
         } else {
             itemsToRender = items
         }
-        return itemsToRender?.map(
+        const result = itemsToRender?.map(
             item => (
             <Card key={item.id} data={item}/>
             )
         )
+        return result?.length > 0? result : <h1>No items found</h1>
     }
 
     return (

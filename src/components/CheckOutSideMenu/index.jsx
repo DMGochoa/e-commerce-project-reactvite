@@ -17,6 +17,7 @@ function CheckOutSideMenu() {
             setOrder,
             setShoppingCount,
             shoppingCount,
+            setSearchedItemByTitle,
         } = React.useContext(ShoppingCartContext)
 
     function handleDelete (id) {
@@ -36,6 +37,7 @@ function CheckOutSideMenu() {
         setCartProducts([])
         setShoppingCount(0)
         CheckoutSideMenu.setClose()
+        setSearchedItemByTitle(null)
     }
 
     return (

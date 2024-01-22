@@ -15,7 +15,7 @@ function MyOrders() {
             </div>
             
             {
-                order.map((order, index) => (
+                order?.map((order, index) => (
                     <Link key={index} to={`/my-orders/${index}`}>
                         <OrdersCard
                             date={order.date.toLocaleDateString("en-US")}

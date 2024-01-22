@@ -60,9 +60,9 @@ function ShoppingCartProvider({ children }) {
             .catch(err => console.error(err));
     }, [])
 
-    function filterItemsBy(items, searchedItem, by) {
+    function filterItemsBy(items, searchedItem) {
         return items?.filter(
-            (item) => item[by]?.toLowerCase().includes(
+            (item) => item.title?.toLowerCase().includes(
                 searchedItem.toLowerCase()
             )
         )
@@ -77,7 +77,7 @@ function ShoppingCartProvider({ children }) {
     }
 
     useEffect(() => {
-        if (searchedCategory && searchedItemByTitle) {
+        if (searchedCategory?.length > 0 && searchedItemByTitle?.length > 0) {
             setFilteredItems(
                 filterItemsBy(
                     filterItemsByCategory(
@@ -85,22 +85,21 @@ function ShoppingCartProvider({ children }) {
                         searchedCategory,
                         "category"),
                     searchedItemByTitle,
-                    "title"
                 )
             )
-        } else if (searchedCategory !== '') {
+        } else if (searchedCategory?.length > 0) {
             setFilteredItems(
                 filterItemsByCategory(
                     items,
                     searchedCategory
                 )
             )
-        } else if (searchedItemByTitle) {
+        } else if (searchedItemByTitle?.length > 0) {
+            console.log(searchedItemByTitle)
             setFilteredItems(
                 filterItemsBy(
                     items,
                     searchedItemByTitle),
-                    "title"
                 )
         }
     }, [items, searchedItemByTitle, searchedCategory])
