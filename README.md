@@ -18,7 +18,7 @@ The structure for the project has on the root of the project two directories, on
   - `components/`: Contains the elements that are commonly use on the project like the navbar or cards.
   - `context/`: Contain the logic and info that is need trough the diferent react components.
   - `pages/`: Contain the diferent pages that are used on the app.
-  - `utils`:  Contain the logic that can be used all over the project.
+  - `utils/`:  Contain the logic that can be used all over the project.
 
 ## Getting Started
 This are the steps that are needed to use the project on local machine.
@@ -42,4 +42,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Contact
 
-If you want to contact me please use [email]( diegomore1997@gmail.com) or [lindedin](https://www.linkedin.com/in/diegoamg/)
+If you want to contact me please use [email]( diegomore1997@gmail.com) or [linkedin](https://www.linkedin.com/in/diegoamg/)
