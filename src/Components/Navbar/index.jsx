@@ -8,8 +8,19 @@ const Navbar = () => {
   const context = useContext(ShoppingCartContext)
   const activeStyle = 'underline underline-offset-4'
 
+  //Account
+  const localSotorageAccount = new AppLocalStorage('account', {})
+
+  function determineElementsInAccount(object) {
+    return object? Object.keys(object).length === 0 : true
+  }
+
+  const noAccountOnLocalStorage = determineElementsInAccount(localSotorageAccount.get())
+  const noAccountOnContext = determineElementsInAccount(context.account)
+  const hasAccount = !noAccountOnLocalStorage || !noAccountOnContext
+
   function renderSignOut () {
-    if (!context.signOut) {
+    if (!context.signOut && hasAccount) {
       return (
         <>
         <li className='text-black/60'>
@@ -41,8 +52,10 @@ const Navbar = () => {
             }
             onClick={
               () => {
-                new AppLocalStorage('sign-out', true)
+                new AppLocalStorage('sign-out', true).set(true)
                 context.setSignOut(true)
+                //new AppLocalStorage('account', {}).clear()
+                //context.setAccount({})
               }
             }
           >
@@ -71,7 +84,7 @@ const Navbar = () => {
     <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light'>
       <ul className='flex items-center gap-3'>
         <li className='font-semibold text-lg'>
-          <NavLink to='/'>
+          <NavLink to={`${context.signOut ? '/sign-in':'/'}`}>
             Shopi
           </NavLink>
         </li>

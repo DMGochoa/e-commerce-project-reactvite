@@ -4,27 +4,43 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../../Components/OrderCard'
 import { totalPrice } from '../../utils'
+import { AppLocalStorage } from '../../utils'
 import './styles.css'
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext)
+  const localSotorageAccount = new AppLocalStorage('account', {})
+  const localSotorageSignOut = new AppLocalStorage('sign-out', false)
+
+  function determineElementsInAccount(object) {
+      return object? Object.keys(object).length === 0 : true
+  }
+
+  const noAccountOnLocalStorage = determineElementsInAccount(localSotorageAccount.get())
+  const noAccountOnContext = determineElementsInAccount(context.account)
+  const hasAccount = !noAccountOnLocalStorage || !noAccountOnContext
+  const signOut = localSotorageSignOut.get() || context.signOut
 
   const handleDelete = (id) => {
     const filteredProducts = context.cartProducts.filter(product => product.id != id)
     context.setCartProducts(filteredProducts)
   }
-
+  console.log(hasAccount, !signOut, localSotorageSignOut.get(), context.signOut)
   const handleCheckout = () => {
-    const orderToAdd = {
-      date: '01.02.23',
-      products: context.cartProducts,
-      totalProducts: context.cartProducts.length,
-      totalPrice: totalPrice(context.cartProducts)
+    if (hasAccount && !signOut) {
+      const orderToAdd = {
+        date: '01.02.23',
+        products: context.cartProducts,
+        totalProducts: context.cartProducts.length,
+        totalPrice: totalPrice(context.cartProducts)
+      }
+      context.closeCheckoutSideMenu()
+      context.setOrder([...context.order, orderToAdd])
+      context.setCartProducts([])
+      context.setSearchByTitle(null)
+    } else {
+      context.closeCheckoutSideMenu()
     }
-
-    context.setOrder([...context.order, orderToAdd])
-    context.setCartProducts([])
-    context.setSearchByTitle(null)
   }
 
   return (
@@ -57,8 +73,13 @@ const CheckoutSideMenu = () => {
           <span className='font-light'>Total:</span>
           <span className='font-medium text-2xl'>${totalPrice(context.cartProducts)}</span>
         </p>
-        <Link to='/my-orders/last'>
-          <button className='bg-black py-3 text-white w-full rounded-lg' onClick={() => handleCheckout()}>Checkout</button>
+        <Link to={`${hasAccount && !signOut ? '/my-orders/last':'/sign-in'}`}>
+          <button 
+            className='bg-black py-3 text-white w-full rounded-lg'
+            onClick={() => handleCheckout()}
+          >
+            Checkout
+          </button>
         </Link>
       </div>
     </aside>

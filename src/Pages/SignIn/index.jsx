@@ -12,6 +12,7 @@ function SignIn() {
 
   //Account
   const localSotorageAccount = new AppLocalStorage('account', {})
+  const localSotorageSignOut = new AppLocalStorage('sign-out', true)
 
   function determineElementsInAccount(object) {
     return object? Object.keys(object).length === 0 : true
@@ -49,7 +50,7 @@ function SignIn() {
                       className='w-full py-2 px-4 bg-gray-800 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50'
                       onClick={
                         () => {
-                          new AppLocalStorage('sign-out', false)
+                          localSotorageSignOut.set(false)
                           context.setSignOut(false)
                           setAccountValues({})
                         }
@@ -114,7 +115,7 @@ function SignIn() {
                 className='w-full py-2 px-4 bg-gray-800 text-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50'
                 onClick={
                   () => {
-                    new AppLocalStorage('sign-out', false)
+                    localSotorageSignOut.set(false)
                     context.setSignOut(false)
                     context.setAccount(accountValues)
                     localSotorageAccount.set(accountValues)
@@ -129,7 +130,7 @@ function SignIn() {
       </div>
     )
   }
-  console.log(view === 'log-in')
+
   const actualRender = view === 'log-in' ? renderLogIn() : renderSignUp()
 
   return (
