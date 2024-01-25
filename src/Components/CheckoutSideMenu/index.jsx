@@ -25,7 +25,6 @@ const CheckoutSideMenu = () => {
     const filteredProducts = context.cartProducts.filter(product => product.id != id)
     context.setCartProducts(filteredProducts)
   }
-  console.log(hasAccount, !signOut, localSotorageSignOut.get(), context.signOut)
   const handleCheckout = () => {
     if (hasAccount && !signOut) {
       const orderToAdd = {
