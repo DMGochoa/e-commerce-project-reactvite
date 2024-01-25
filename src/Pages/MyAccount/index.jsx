@@ -32,32 +32,34 @@ function MyAccount() {
 
   return (
     <Layout>
+        <div className='flex items-center justify-center relative w-80 mb-4'>
+          <h1 className='font-medium text-xl'>My Account</h1>
+        </div>
         <div className='w-full max-w-md p-6 border border-gray-200 rounded-lg shadow-sm'>
             {Object.entries(account).map(([key, value]) => (
-                <div key={key} className='flex flex-col' >
-                  <span>{key}</span>
-                    <div className='flex items-center justify-between py-2'>
+                <div key={key} className='flex items-center justify-between py-2'>
+                    <div>
+                        <span className='font-medium mr-2'>{key.toLocaleUpperCase()}:</span>
                         {editing[key] ? (
                           <>
                             <input
                                 type={key === 'password' ? 'password' : 'text'}
                                 value={tempAccount[key]}
                                 onChange={(e) => handleChange(e, key)}
-                                className='p-2 border border-gray-300 rounded-lg max-w-sm'
+                                className='p-2 border border-gray-300 rounded-md'
                             />
                           </>
                         ) : (
                             <span className='font-medium'>{key === 'password'? '******':value}</span>
                         )}
-                      <button
+                    </div>
+                    <button
                         onClick={() => editing[key] ? handleConfirmClick(key) : handleEditClick(key)}
                         className='p-2 text-white bg-blue-500 rounded-md'
-                      >
+                    >
                         {/* Reemplaza con tus íconos */}
                         {editing[key] ? 'Confirm' : 'Edit'}
-                      </button>
-                    </div>
-                    
+                    </button>
                 </div>
             ))}
         </div>
